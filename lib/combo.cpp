@@ -123,8 +123,9 @@ combo::combo(ddi_sel* ds, int _pipe) : phys(_pipe)
  */
 combo::~combo()
 {
-	ddi_sel* ds = get_ds();
-	combo_table[ds->dpll_num].enabled = 0;
+    if (ddi_sel* ds = get_ds(); ds != NULL) {
+        combo_table[ds->dpll_num].enabled = 0;
+    }
 }
 
 /**
@@ -282,4 +283,3 @@ int combo::program_mmio(int mod)
 
 	return 0;
 }
-
